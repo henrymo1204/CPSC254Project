@@ -25,6 +25,8 @@ public:
   bool food_eaten;
   bool is_dead;
   int length;
+  int return_speed();
+  int pause_length;
 
 private:
   pthread_t input_thread;
@@ -35,6 +37,7 @@ private:
   int snake_world_array[MAP_HEIGHT][MAP_WIDTH];
   void clear_snake_world();
   void initialize_snake();
+  int random;
 };
 
 #endif

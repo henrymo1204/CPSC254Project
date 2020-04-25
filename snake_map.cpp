@@ -6,8 +6,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include "macros.h"
+#include "snake.h"
 
 using namespace std;
+
 
 SnakeMap::SnakeMap(Snake *snake)
 {
@@ -25,14 +27,17 @@ void SnakeMap::redraw(void)
         cout << endl;
     }
     update_score();
+    update_speed();
     vector<pair<int, int>> snake_parts = snake->snake_parts;
     for (int i = 0; i < snake_parts.size(); i++)
     {
         pair<int, int> tmp = snake_parts[i];
         map_array[tmp.first][tmp.second] = SNAKE_CHAR;
     }
+
     update_snake_head(map_array, snake);
     update_snake_food(false);
+
     map_array[snake_food.first][snake_food.second] = SNAKE_FOOD_CHAR;
     for (int i = 0; i < MAP_HEIGHT; i++)
     {
@@ -100,4 +105,9 @@ void update_snake_head(char map_array[MAP_HEIGHT][MAP_WIDTH], Snake *snake)
 void SnakeMap::update_score(void)
 {
     cout << "Score:" << snake->length << endl;
+}
+
+void SnakeMap::update_speed(void)
+{
+    cout << "Speed:" << snake->pause_length/1000 << " milliseconds" << endl;
 }

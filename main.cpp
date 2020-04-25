@@ -54,7 +54,7 @@ void start_game()
         }
         snake_map.redraw();
 
-        usleep(PAUSE_LENGTH);
+        usleep(snake.return_speed());
 
         snake.validate_direction();
     }
