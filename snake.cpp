@@ -116,12 +116,20 @@ void Snake::update_movement(void)
         {
             // TODO: after eating an apple
             // change speed
-            random = rand() % 2;
+            random = rand() % 3;
             if (random == 0) {
                 pause_length = pause_length - 1000 * 10;
-            } else {
+            } else if (random == 1){
                 pause_length = pause_length + 1000 * 10;
+            } else{
+                int n = rand() % 5 + 1;
+                length = length + n;
+                for (int i = 0; i < n; i++){
+                    pair<int, int> tail = snake_parts.front();
+                    snake_parts.push_back(tail);
+                }
             }
+
             break;
         }
     }
