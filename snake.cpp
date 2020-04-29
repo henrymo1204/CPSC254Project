@@ -114,7 +114,7 @@ void Snake::update_movement(void)
         random = rand() % 4;
         if(random == 0)
         {
-	        int n = rand();
+	    int n = rand();
             length = length + n;
         }
         else if(random == 1){
