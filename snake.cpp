@@ -108,6 +108,24 @@ void Snake::update_movement(void)
     }
     snake_head = movement_part;
     snake_parts.push_back(movement_part);
+    
+    for (int i = 0; i < apples.size(); i++) {
+        pair<int, int> apple = apples[i];
+        apple_eaten = snake_head.first == apple.first && snake_head.second == apple.second;
+        if (apple_eaten)
+        {
+            // TODO: after eating an apple
+            // change speed
+            random = rand() % 2;
+            if (random == 0) {
+                pause_length = pause_length - 1000 * 10;
+            } else {
+                pause_length = pause_length + 1000 * 10;
+            }
+            break;
+        }
+    }
+
     food_eaten = snake_head.first == snake_food.first && snake_head.second == snake_food.second;
     if (food_eaten)
     {
@@ -144,6 +162,11 @@ void Snake::update_movement(void)
 void Snake::set_snake_food(pair<int, int> snake_food)
 {
     this->snake_food = snake_food;
+}
+
+void Snake::set_apples(vector<pair<int, int>> apples)
+{
+    this->apples = apples;
 }
 
 void Snake::clear_snake_world(void)

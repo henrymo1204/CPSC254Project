@@ -10,7 +10,9 @@ public:
   SnakeMap(Snake *snake);
   void redraw();
   pair<int, int> snake_food;
+  vector<pair<int, int>> apples;
   void update_snake_food(bool force_update);
+  void update_apples(bool force_update);
   void update_score();
   void update_speed();
 private:
