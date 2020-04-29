@@ -111,9 +111,11 @@ void Snake::update_movement(void)
     food_eaten = snake_head.first == snake_food.first && snake_head.second == snake_food.second;
     if (food_eaten)
     {
-        random = rand() % 3;
-        if(random == 0){
-            length++;
+        random = rand() % 4;
+        if(random == 0)
+        {
+	        int n = rand();
+            length = length + n;
         }
         else if(random == 1){
             pause_length = pause_length - 1000 * 10;
@@ -127,6 +129,11 @@ void Snake::update_movement(void)
             snake_world_array[tail.first][tail.second]--;
             snake_parts.erase(snake_parts.begin());
         }
+	    else if(random == 3)
+	    {
+	        int n = rand();
+	        length = length - n;	
+	    }
     }
     else
     {
