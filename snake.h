@@ -22,7 +22,9 @@ public:
   pair<int, int> snake_head;
   void update_movement();
   void set_snake_food(pair<int, int> snake_food);
+  void set_apples(vector<pair<int, int>> apples);
   bool food_eaten;
+  bool apple_eaten;
   bool is_dead;
   int length;
   int return_speed();
@@ -34,6 +36,7 @@ private:
   enum Direction direction;
   enum Direction next_direction;
   pair<int, int> snake_food;
+  vector<pair<int, int>> apples;
   int snake_world_array[MAP_HEIGHT][MAP_WIDTH];
   void clear_snake_world();
   void initialize_snake();
