@@ -11,6 +11,7 @@
 #define SNAKE_HEAD_EAST '<'
 #define SNAKE_HEAD_SOUTH '^'
 #define SNAKE_FOOD_CHAR '*'
+#define APPLE_CHAR '&'
 
 #define INITIAL_SNAKE_LENGTH 3
 

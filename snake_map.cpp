@@ -17,6 +17,7 @@ SnakeMap::SnakeMap(Snake *snake)
     clear_map(this->map_array);
     srand(time(NULL));
     update_snake_food(true);
+    update_apples(true);
 }
 
 void SnakeMap::redraw(void)
@@ -37,8 +38,17 @@ void SnakeMap::redraw(void)
 
     update_snake_head(map_array, snake);
     update_snake_food(false);
+    update_apples(false);
 
     map_array[snake_food.first][snake_food.second] = SNAKE_FOOD_CHAR;
+
+    // draw apples
+    for (int i = 0; i < apples.size(); i++)
+    {
+        pair<int, int> tmp = apples[i];
+        map_array[tmp.first][tmp.second] = APPLE_CHAR;
+    }
+
     for (int i = 0; i < MAP_HEIGHT; i++)
     {
         for (int j = 0; j < MAP_WIDTH; j++)
@@ -65,6 +75,29 @@ void SnakeMap::update_snake_food(bool force_update)
                 break;
             }
         }
+    }
+}
+
+void SnakeMap::update_apples(bool force_update)
+{
+    if (snake->apple_eaten || force_update)
+    {
+        apples.clear();
+        int random = rand() % 3 + 1;
+        for (int i = 0; i < random; i++) {
+            while (true)
+            {
+                int random_i = rand() % MAP_WIDTH;
+                int random_j = rand() % MAP_HEIGHT;
+                if (map_array[random_i][random_j] == MAP_CHAR)
+                {
+                    apples.push_back(make_pair(random_i, random_j));
+                    break;
+                }
+            }
+        }
+        snake->set_apples(apples);
+        snake->apple_eaten = false;
     }
 }
 
