@@ -112,25 +112,8 @@ void Snake::update_movement(void)
     for (int i = 0; i < apples.size(); i++) {
         pair<int, int> apple = apples[i];
         apple_eaten = snake_head.first == apple.first && snake_head.second == apple.second;
-        if (apple_eaten)
-        {
-            // TODO: after eating an apple
-            // change speed
-            random = rand() % 3;
-            if (random == 0) {
-                pause_length = pause_length - 1000 * 10;
-            } else if (random == 1){
-                pause_length = pause_length + 1000 * 10;
-            } else{
-                int n = rand() % 5 + 1;
-                length = length + n;
-                for (int i = 0; i < n; i++){
-                    pair<int, int> tail = snake_parts.front();
-                    snake_parts.push_back(tail);
-                }
-            }
-
-            break;
+        if (apple_eaten){
+           break;
         }
     }
 
@@ -138,6 +121,43 @@ void Snake::update_movement(void)
     if (food_eaten)
     {
         length++;
+    }
+    else if(apple_eaten){
+        // TODO: after eating an apple
+        // change speed
+        random = rand() % 4;
+        if (random == 0) {
+            pause_length = pause_length - 1000 * 10;
+            pair<int, int> tail = snake_parts.front();
+            snake_world_array[tail.first][tail.second]--;
+            snake_parts.erase(snake_parts.begin());
+        } else if (random == 1){
+            pause_length = pause_length + 1000 * 10;
+            pair<int, int> tail = snake_parts.front();
+            snake_world_array[tail.first][tail.second]--;
+            snake_parts.erase(snake_parts.begin());
+        } else if (random == 2){
+            int n = rand() % 5 + 1;
+            if (n == 1){
+                length++;
+            }
+            else{
+                length = length + n;
+                for (int i = 0; i < n - 1; i++){
+                    pair<int, int> tail = snake_parts.front();
+                    snake_parts.insert(snake_parts.begin(), tail);
+                }
+            }
+        } else{
+            int n = rand() % 5 + 1;
+            while (n >= length){
+                int n = rand() % 5 + 1;
+            }
+            length = length - n;
+            for (int i = 0; i < n + 1; i++){
+                snake_parts.erase(snake_parts.begin());
+            }
+        }
     }
     else
     {
