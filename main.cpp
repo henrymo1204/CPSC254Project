@@ -29,10 +29,12 @@ bool is_game_end()
     if (snake_head.first < 0 || snake_head.first >= MAP_WIDTH || snake_head.second < 0 || snake_head.second >= MAP_HEIGHT)
     {
         result = true;
+        cout << "wall" << endl;
     }
     if (snake.is_dead)
     {
         result = true;
+        cout << "dead" << endl;
     }
     return result;
 }

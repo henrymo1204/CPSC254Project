@@ -145,16 +145,19 @@ void Snake::update_movement(void)
                 length = length + n;
                 for (int i = 0; i < n - 1; i++){
                     pair<int, int> tail = snake_parts.front();
+                    snake_world_array[tail.first][tail.second]++;
                     snake_parts.insert(snake_parts.begin(), tail);
                 }
             }
         } else{
             int n = rand() % 5 + 1;
             while (n >= length){
-                int n = rand() % 5 + 1;
+                n = rand() % 5 + 1;
             }
             length = length - n;
             for (int i = 0; i < n + 1; i++){
+                pair<int, int> tail = snake_parts.front();
+                snake_world_array[tail.first][tail.second]--;
                 snake_parts.erase(snake_parts.begin());
             }
         }
@@ -168,6 +171,7 @@ void Snake::update_movement(void)
     int head_value = ++snake_world_array[snake_head.first][snake_head.second];
     if (head_value > 1)
     {
+        cout << head_value << endl;
         is_dead = true;
     }
 }
