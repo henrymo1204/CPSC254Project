@@ -154,7 +154,6 @@ void Snake::update_movement(void)
             length = length - n;
             if(length < 1){
                 is_dead = true;
-                cout << "0 length = dead" << endl;
             }
             else{
               for (int i = 0; i < n + 1; i++){
