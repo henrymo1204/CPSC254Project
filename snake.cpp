@@ -107,7 +107,7 @@ void Snake::update_movement(void)
         break;
     }
     snake_head = movement_part;
-    snake_parts.push_back(movement_part);
+    snake_parts.push_back(movement_part);//push the new head location to the end of the vector
 
     for (int i = 0; i < apples.size(); i++) {
         pair<int, int> apple = apples[i];
@@ -118,45 +118,45 @@ void Snake::update_movement(void)
     }
 
     food_eaten = snake_head.first == snake_food.first && snake_head.second == snake_food.second;
-    if (food_eaten)
+    if (food_eaten)//if foot is eaten
     {
-        length++;
+        length++;//increase score
     }
-    else if(apple_eaten){
+    else if(apple_eaten){//if apple is eaten
         // TODO: after eating an apple
         // change speed
         random = rand() % 4;
-        if (random == 0) {
-            pause_length = pause_length - 1000 * 10;
+        if (random == 0) {//increase speed
+            pause_length = pause_length - 1000 * 10;//decrease the time for the console to update
             pair<int, int> tail = snake_parts.front();
             snake_world_array[tail.first][tail.second]--;
-            snake_parts.erase(snake_parts.begin());
-        } else if (random == 1){
-            pause_length = pause_length + 1000 * 10;
+            snake_parts.erase(snake_parts.begin());//pop the tail location from the beginning of the vector
+        } else if (random == 1){//decrease speed
+            pause_length = pause_length + 1000 * 10;//increase the time for the console to update
             pair<int, int> tail = snake_parts.front();
             snake_world_array[tail.first][tail.second]--;
-            snake_parts.erase(snake_parts.begin());
-        } else if (random == 2){
+            snake_parts.erase(snake_parts.begin());//pop the tail location from the beginning of the vector
+        } else if (random == 2){//increase length
             int n = rand() % 5 + 1;
             if (n == 1){
                 length++;
             }
             else{
                 length = length + n;
-                for (int i = 0; i < n - 1; i++){
+                for (int i = 0; i < n - 1; i++){//insert new tail location to the begining of the vector using for loop
                     pair<int, int> tail = snake_parts.front();
                     snake_world_array[tail.first][tail.second]++;
                     snake_parts.insert(snake_parts.begin(), tail);
                 }
             }
-        } else{
+        } else{//decrease length
             int n = rand() % 5 + 1;
             length = length - n;
-            if(length < 1){
+            if(length < 1){//if snake length is less than 1, the snake dies
                 is_dead = true;
             }
             else{
-              for (int i = 0; i < n + 1; i++){
+              for (int i = 0; i < n + 1; i++){//pop tail location from the beginning of the vector using for loop
                   pair<int, int> tail = snake_parts.front();
                   snake_world_array[tail.first][tail.second]--;
                   snake_parts.erase(snake_parts.begin());
@@ -164,11 +164,11 @@ void Snake::update_movement(void)
             }
         }
     }
-    else
+    else//if food and apple not eaten
     {
         pair<int, int> tail = snake_parts.front();
-        snake_world_array[tail.first][tail.second]--;
-        snake_parts.erase(snake_parts.begin());
+        snake_world_array[tail.first][tail.second]--;//update the snake world array
+        snake_parts.erase(snake_parts.begin());//pop tail location from the beginning of the vector
     }
     int head_value = ++snake_world_array[snake_head.first][snake_head.second];
     if (head_value > 1)
