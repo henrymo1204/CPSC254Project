@@ -1,3 +1,10 @@
+//'The Gambling Snake'
+//CPSC 254
+//Da Hang        dhang0129@gmail.com
+//Xinxue Wang    xinxue0209@csu.fullerton.edu
+//Juheng Mo      henrymo@csu.fullerton.edu
+
+
 #include "input.h"
 #include <termios.h>
 #include <unistd.h>
