@@ -16,13 +16,14 @@ using namespace std;
 
 struct termios t;
 
+//turn off input
 void input_enter_off()
 {
     tcgetattr(STDIN_FILENO, &t);
     t.c_lflag &= ~ICANON;
     tcsetattr(STDIN_FILENO, TCSANOW, &t);
 }
-
+//turn on input
 void input_enter_on()
 {
     tcgetattr(STDIN_FILENO, &t);
@@ -30,6 +31,7 @@ void input_enter_on()
     tcsetattr(STDIN_FILENO, TCSANOW, &t);
 }
 
+//keyboard assigned for direction control
 enum Direction get_input()
 {
     enum Direction result = East;
