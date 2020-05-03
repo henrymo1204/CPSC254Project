@@ -1,7 +1,8 @@
 #ifndef _input_h
 #define _input_h
 
-
+//values assigned for direction movement
+//ERROR when 
 enum Direction {
     Error = -1,
     West = 0,
