@@ -1,3 +1,8 @@
+//'The Gambling Snake'
+//CPSC 254
+//Da Hang        dhang0129@gmail.com
+//Xinxue Wang    xinxue0209@csu.fullerton.edu
+//Juheng Mo      henrymo@csu.fullerton.edu
 #include "snake_map.h"
 #include <pthread.h>
 #include <iostream>
@@ -20,7 +25,10 @@ SnakeMap::SnakeMap(Snake *snake)
     update_apples(true);
 }
 
-void SnakeMap::redraw(void) //updating the map with '.'
+
+//updating the map with '.'
+
+void SnakeMap::redraw(void) 
 {
     clear_map(this->map_array);
     for (int i = 0; i < MAP_END; i++)//traverse every point on the map
