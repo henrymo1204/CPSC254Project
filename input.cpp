@@ -31,11 +31,16 @@ void input_enter_on()
     tcsetattr(STDIN_FILENO, TCSANOW, &t);
 }
 
-//keyboard assigned for direction control
+/*program will read input from the user to determine which 
+direction to go. If the input is not listed, the screen will
+appear 'incorrect buttom clicked' to warn*/
+
 enum Direction get_input()
 {
     enum Direction result = East;
-    char user_input = getchar();
+    char user_input = getchar();//reading input from user
+    
+    //keyboard assigned for direction control
     switch (user_input)
     {
     case 'a':
