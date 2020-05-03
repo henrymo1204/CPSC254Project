@@ -2,7 +2,7 @@
 #define _input_h
 
 //values assigned for direction movement
-//ERROR when 
+//default set to Error unless the user input the specific letter.
 enum Direction {
     Error = -1,
     West = 0,
