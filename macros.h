@@ -1,3 +1,9 @@
+//'The Gambling Snake'
+//CPSC 254
+//Da Hang        dhang0129@gmail.com
+//Xinxue Wang    xinxue0209@csu.fullerton.edu
+//Juheng Mo      henrymo@csu.fullerton.edu
+
 #ifndef _macros_h
 #define _macros_h
 
