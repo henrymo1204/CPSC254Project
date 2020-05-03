@@ -1,3 +1,9 @@
+//'The Gambling Snake'
+//CPSC 254
+//Da Hang        dhang0129@gmail.com
+//Xinxue Wang    xinxue0209@csu.fullerton.edu
+//Juheng Mo      henrymo@csu.fullerton.edu
+
 #include "snake.h"
 #include <pthread.h>
 #include <iostream>
@@ -32,6 +38,9 @@ Snake::Snake(void)
     pause_length = PAUSE_LENGTH;
 }
 
+/*update the direction. for example, if the user entered 'West', check first if the snake if moving toward its 
+direction East, if yes, then ignore the order because the snake cannot simply make a turn; otherwise, what's 
+entered will be updated as the current direction the snake if moving toward.*/
 void Snake::update_direction(enum Direction direction)
 {
     sem_wait(&this->snake_sema);
@@ -63,7 +72,7 @@ void Snake::update_direction(enum Direction direction)
         break;
     }
     sem_post(&this->snake_sema);
-}
+}//end updating direction
 
 void Snake::update_next_direction(enum Direction direction)
 {
@@ -79,6 +88,7 @@ enum Direction Snake::get_direction(void)
     return result;
 }
 
+//check if direction entered is valid
 void Snake::validate_direction(void)
 {
     if (next_direction != Error)
@@ -87,6 +97,7 @@ void Snake::validate_direction(void)
     }
 }
 
+//determine the next point the snake will be moving to. (x, y) is represented as below.
 void Snake::update_movement(void)
 {
     pair<int, int> movement_part;
@@ -111,6 +122,7 @@ void Snake::update_movement(void)
 
     for (int i = 0; i < apples.size(); i++) {
         pair<int, int> apple = apples[i];
+        //if the coordinate of the snake is the same as the apple, the apple is eaten
         apple_eaten = snake_head.first == apple.first && snake_head.second == apple.second;
         if (apple_eaten){
             break;
@@ -118,7 +130,7 @@ void Snake::update_movement(void)
     }
 
     food_eaten = snake_head.first == snake_food.first && snake_head.second == snake_food.second;
-    if (food_eaten)//if foot is eaten
+    if (food_eaten)//if food is eaten
     {
         length++;//increase score
     }
@@ -177,17 +189,18 @@ void Snake::update_movement(void)
     }
 }
 
+//set coordinate of food
 void Snake::set_snake_food(pair<int, int> snake_food)
 {
     this->snake_food = snake_food;
 }
-
+//set coordinate of apple
 void Snake::set_apples(vector<pair<int, int>> apples)
 {
     this->apples = apples;
 }
-
-void Snake::clear_snake_world(void)
+//reset the map
+void Snake::clear_snake_world(void) 
 {
     for (int i = 0; i < MAP_HEIGHT; i++)
     {
@@ -202,9 +215,11 @@ void Snake::initialize_snake(void)
 {
     for (int i = 0; i < INITIAL_SNAKE_LENGTH; i++)
     {
+        //initializing the point snake starts with the below formula
         pair<int, int> snake_part = make_pair(MAP_HEIGHT / 2, MAP_WIDTH / 2 - (INITIAL_SNAKE_LENGTH / 2) + i);
+        //location pushed to the vector
         snake_parts.push_back(snake_part);
-        snake_world_array[snake_part.first][snake_part.second] = 1;
+        snake_world_array[snake_part.first][snake_part.second] = 1;//set snake_world_array to (1,1)
     }
     snake_head = snake_parts[snake_parts.size() - 1];
 }
